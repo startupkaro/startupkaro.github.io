@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abhishek Patel — Founder, Samiksha Tech Solutions | IT Consultant & Software Engineer</title>
+<meta name="description" content="Founder of Samiksha Tech Solutions, former Software Engineer at Wipro Limited, Co-founder of URROSSA Manufacturing. IT consulting, software engineering, and poetry." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+:root{
+  --navy:        #0b1d33;
+  --navy-2:      #12294a;
+  --navy-3:      #1b3a63;
+  --accent:      #c8a24a;
+  --accent-dark: #a8842f;
+  --accent-soft: rgba(200,162,74,.12);
+
+  --text:        #39465a;
+  --muted:       #6d7c91;
+  --heading:     #0b1d33;
+
+  --bg:          #ffffff;
+  --surface:     #f6f8fb;
+  --surface-2:   #eef2f7;
+  --line:        #e2e8f0;
+
+  --radius:      16px;
+  --radius-sm:   10px;
+  --shadow-sm:   0 2px 10px rgba(11,29,51,.06);
+  --shadow:      0 12px 34px rgba(11,29,51,.09);
+  --shadow-lg:   0 26px 60px rgba(11,29,51,.14);
+
+  --container:   1140px;
+  --ease:        cubic-bezier(.4,0,.2,1);
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+html{
+  scroll-behavior:smooth;
+  -webkit-text-size-adjust:100%;
+}
+
+body{
+  font-family:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  color:var(--text);
+  background:var(--bg);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+
+h1,h2,h3,h4{
+  font-family:'Playfair Display', Georgia, serif;
+  color:var(--heading);
+  line-height:1.22;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+
+/* Section anchor offset for fixed header */
+section[id]{ scroll-margin-top:84px; }
+
+/* ============================================================
+   3. LAYOUT HELPERS
+   ============================================================ */
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:24px;
+}
+
+.section{ padding:104px 0; }
+.section--surface{ background:var(--surface); }
+
+.section-head{ max-width:660px; margin-bottom:56px; }
+.section-head--center{ margin-inline:auto; text-align:center; }
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-size:.74rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--accent-dark);
+  margin-bottom:16px;
+}
+.eyebrow::before{
+  content:"";
+  width:26px; height:1.5px;
+  background:var(--accent);
+  display:block;
+}
+.section-head--center .eyebrow::after{
+  content:"";
+  width:26px; height:1.5px;
+  background:var(--accent);
+  display:block;
+}
+
+.section-title{
+  font-size:clamp(1.85rem, 3.6vw, 2.6rem);
+  margin-bottom:18px;
+}
+.section-sub{
+  color:var(--muted);
+  font-size:1.02rem;
+}
+
+/* ============================================================
+   4. BUTTONS
+   ============================================================ */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:14px 28px;
+  border-radius:100px;
+  font-size:.93rem;
+  font-weight:600;
+  letter-spacing:.01em;
+  transition:all .3s var(--ease);
+  white-space:nowrap;
+  border:1.5px solid transparent;
+}
+.btn svg{ width:16px; height:16px; flex-shrink:0; }
+
+.btn--primary{
+  background:var(--accent);
+  color:#241a05;
+  box-shadow:0 8px 22px rgba(200,162,74,.32);
+}
+.btn--primary:hover{
+  background:var(--accent-dark);
+  color:#fff;
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px rgba(200,162,74,.4);
+}
+
+.btn--ghost{
+  border-color:rgba(255,255,255,.28);
+  color:#fff;
+}
+.btn--ghost:hover{
+  background:rgba(255,255,255,.1);
+  border-color:rgba(255,255,255,.6);
+  transform:translateY(-3px);
+}
+
+.btn--outline{
+  border-color:var(--line);
+  color:var(--heading);
+  background:#fff;
+}
+.btn--outline:hover{
+  border-color:var(--accent);
+  color:var(--accent-dark);
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-sm);
+}
+
+/* ============================================================
+   5. HEADER / NAV
+   ============================================================ */
+.site-header{
+  position:fixed;
+  inset:0 0 auto 0;
+  z-index:1000;
+  padding:18px 0;
+  transition:all .35s var(--ease);
+}
+.site-header.scrolled{
+  padding:10px 0;
+  background:rgba(255,255,255,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 4px 24px rgba(11,29,51,.06);
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+
+/* Brand */
+.brand{ display:flex; align-items:center; gap:12px; }
+.brand__mark{
+  width:42px; height:42px;
+  border-radius:11px;
+  background:linear-gradient(135deg, var(--accent), #e2c47c);
+  display:grid; place-items:center;
+  font-family:'Playfair Display', serif;
+  font-weight:700;
+  font-size:1.1rem;
+  color:#241a05;
+  flex-shrink:0;
+  box-shadow:0 6px 16px rgba(200,162,74,.35);
+  transition:transform .3s var(--ease);
+}
+.brand:hover .brand__mark{ transform:rotate(-6deg) scale(1.05); }
+
+.brand__text{ display:flex; flex-direction:column; line-height:1.15; }
+.brand__name{
+  font-weight:700;
+  font-size:.98rem;
+  color:#fff;
+  letter-spacing:-.01em;
+  transition:color .35s var(--ease);
+}
+.brand__role{
+  font-size:.68rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.6);
+  font-weight:500;
+  transition:color .35s var(--ease);
+}
+.site-header.scrolled .brand__name{ color:var(--navy); }
+.site-header.scrolled .brand__role{ color:var(--muted); }
+
+/* Nav links */
+.nav__list{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+.nav__link{
+  position:relative;
+  padding:9px 15px;
+  font-size:.88rem;
+  font-weight:500;
+  color:rgba(255,255,255,.82);
+  border-radius:8px;
+  transition:color .25s var(--ease), background .25s var(--ease);
+}
+.nav__link:hover{ color:#fff; background:rgba(255,255,255,.08); }
+
+.site-header.scrolled .nav__link{ color:var(--text); }
+.site-header.scrolled .nav__link:hover{
+  color:var(--navy);
+  background:var(--accent-soft);
+}
+
+.nav__link.active{ color:var(--accent); }
+.site-header.scrolled .nav__link.active{ color:var(--accent-dark); }
+.nav__link.active::after{
+  content:"";
+  position:absolute;
+  left:15px; right:15px; bottom:2px;
+  height:2px;
+  background:var(--accent);
+  border-radius:2px;
+}
+
+.nav__cta{
+  padding:11px 22px;
+  font-size:.85rem;
+  background:var(--accent);
+  color:#241a05;
+  border-radius:100px;
+  font-weight:600;
+  transition:all .3s var(--ease);
+}
+.nav__cta:hover{
+  background:var(--accent-dark);
+  color:#fff;
+  transform:translateY(-2px);
+}
+
+/* Burger */
+.nav__toggle{
+  display:none;
+  width:44px; height:44px;
+  border-radius:10px;
+  position:relative;
+  border:1px solid rgba(255,255,255,.22);
+  transition:all .3s var(--ease);
+}
+.site-header.scrolled .nav__toggle{ border-color:var(--line); }
+
+.nav__toggle span{
+  position:absolute;
+  left:50%; transform:translateX(-50%);
+  width:19px; height:2px;
+  background:#fff;
+  border-radius:2px;
+  transition:all .3s var(--ease);
+}
+.site-header.scrolled .nav__toggle span{ background:var(--navy); }
+
+.nav__toggle span:nth-child(1){ top:15px; }
+.nav__toggle span:nth-child(2){ top:21px; }
+.nav__toggle span:nth-child(3){ top:27px; }
+
+.nav__toggle.open span:nth-child(1){ top:21px; transform:translateX(-50%) rotate(45deg); }
+.nav__toggle.open span:nth-child(2){ opacity:0; }
+.nav__toggle.open span:nth-child(3){ top:21px; transform:translateX(-50%) rotate(-45deg); }
+
+/* ============================================================
+   6. HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  background:var(--navy);
+  color:#fff;
+  padding:172px 0 110px;
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 480px at 78% 8%, rgba(200,162,74,.16), transparent 62%),
+    radial-gradient(700px 500px at 6% 92%, rgba(46,102,180,.32), transparent 62%);
+  z-index:-1;
+}
+.hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 40%, #000 20%, transparent 78%);
+  z-index:-1;
+}
+
+.hero__grid{
+  display:grid;
+  grid-template-columns:1.25fr .85fr;
+  gap:64px;
+  align-items:center;
+}
+
+.hero__badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:7px 16px 7px 8px;
+  border-radius:100px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.13);
+  font-size:.79rem;
+  font-weight:500;
+  color:rgba(255,255,255,.88);
+  margin-bottom:26px;
+  backdrop-filter:blur(6px);
+}
+.hero__badge .dot{
+  width:8px; height:8px;
+  border-radius:50%;
+  background:#4ade80;
+  box-shadow:0 0 0 4px rgba(74,222,128,.18);
+  animation:pulse 2.4s infinite;
+  flex-shrink:0;
+}
+@keyframes pulse{
+  0%,100%{ box-shadow:0 0 0 4px rgba(74,222,128,.18); }
+  50%    { box-shadow:0 0 0 9px rgba(74,222,128,0); }
+}
+
+.hero h1{
+  font-size:clamp(2.3rem, 5.2vw, 3.65rem);
+  color:#fff;
+  margin-bottom:22px;
+  letter-spacing:-.02em;
+}
+.hero h1 .accent{
+  color:var(--accent);
+  font-style:italic;
+}
+
+.hero__role{
+  font-size:1.08rem;
+  color:rgba(255,255,255,.78);
+  margin-bottom:20px;
+  min-height:1.7em;
+  font-weight:400;
+}
+.hero__role .typed{
+  color:var(--accent);
+  font-weight:600;
+  border-right:2px solid var(--accent);
+  padding-right:3px;
+  animation:caret 1s step-end infinite;
+}
+@keyframes caret{ 50%{ border-color:transparent; } }
+
+.hero__desc{
+  font-size:1.02rem;
+  color:rgba(255,255,255,.66);
+  max-width:560px;
+  margin-bottom:38px;
+}
+
+.hero__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-bottom:52px;
+}
+
+/* Stats */
+.hero__stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  padding-top:34px;
+  border-top:1px solid rgba(255,255,255,.11);
+  max-width:600px;
+}
+.stat__num{
+  font-family:'Playfair Display', serif;
+  font-size:1.95rem;
+  font-weight:700;
+  color:var(--accent);
+  line-height:1;
+  margin-bottom:7px;
+}
+.stat__label{
+  font-size:.76rem;
+  color:rgba(255,255,255,.55);
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  font-weight:500;
+  line-height:1.45;
+}
+
+/* Hero card */
+.hero__card{
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:22px;
+  padding:32px;
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 30px 70px rgba(0,0,0,.28);
+  animation:float 7s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{ transform:translateY(0); }
+  50%    { transform:translateY(-12px); }
+}
+
+
+.hero__card h3{
+  color:#fff;
+  font-size:1.12rem;
+  margin-bottom:5px;
+  font-family:'Inter', sans-serif;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
+.hero__card .card-role{
+  font-size:.79rem;
+  color:var(--accent);
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  font-weight:600;
+  margin-bottom:22px;
+  display:block;
+}
+.hero__card ul{ display:grid; gap:15px; }
+.hero__card li{
+  display:flex;
+  gap:13px;
+  font-size:.88rem;
+  color:rgba(255,255,255,.76);
+  line-height:1.55;
+}
+.hero__card li svg{
+  width:17px; height:17px;
+  color:var(--accent);
+  flex-shrink:0;
+  margin-top:3px;
+}
+/* Profile image in hero card */
+.hero__card .profile-img{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  margin:0 auto 18px;
+  border:3px solid var(--accent);
+  box-shadow:0 8px 24px rgba(200,162,74,.35);
+}
+
+/* ============================================================
+   7. ABOUT
+   ============================================================ */
+.about__grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:64px;
+  align-items:start;
+}
+
+.about__text p{ margin-bottom:18px; font-size:1.01rem; }
+.about__text p:last-child{ margin-bottom:0; }
+.about__text strong{ color:var(--heading); font-weight:600; }
+
+.about__pillars{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
+
+.pillar{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:26px 22px;
+  transition:all .35s var(--ease);
+  position:relative;
+  overflow:hidden;
+}
+.pillar::before{
+  content:"";
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:3px;
+  background:linear-gradient(90deg, var(--accent), transparent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+.pillar:hover::before{ transform:scaleX(1); }
+.pillar:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow);
+  border-color:transparent;
+}
+
+.pillar__icon{
+  width:44px; height:44px;
+  border-radius:12px;
+  background:var(--accent-soft);
+  display:grid; place-items:center;
+  color:var(--accent-dark);
+  margin-bottom:16px;
+}
+.pillar__icon svg{ width:21px; height:21px; }
+
+.pillar h4{
+  font-family:'Inter', sans-serif;
+  font-size:.95rem;
+  font-weight:600;
+  margin-bottom:7px;
+  letter-spacing:-.01em;
+}
+.pillar p{ font-size:.85rem; color:var(--muted); line-height:1.62; }
+
+/* ============================================================
+   8. TIMELINE
+   ============================================================ */
+.timeline{
+  position:relative;
+  max-width:900px;
+  margin-inline:auto;
+  padding-left:38px;
+}
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:8px; top:10px; bottom:10px;
+  width:2px;
+  background:linear-gradient(180deg, var(--accent), rgba(200,162,74,.15));
+  border-radius:2px;
+}
+
+.tl-item{
+  position:relative;
+  padding-bottom:44px;
+}
+.tl-item:last-child{ padding-bottom:0; }
+
+.tl-item::before{
+  content:"";
+  position:absolute;
+  left:-38px; top:8px;
+  width:18px; height:18px;
+  border-radius:50%;
+  background:#fff;
+  border:3px solid var(--accent);
+  box-shadow:0 0 0 5px rgba(200,162,74,.13);
+  transition:all .3s var(--ease);
+}
+.tl-item:hover::before{
+  background:var(--accent);
+  box-shadow:0 0 0 8px rgba(200,162,74,.16);
+}
+
+.tl-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:28px 30px;
+  transition:all .35s var(--ease);
+}
+.tl-card:hover{
+  transform:translateX(6px);
+  box-shadow:var(--shadow);
+  border-color:rgba(200,162,74,.35);
+}
+
+.tl-top{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:8px;
+}
+
+.tl-role{
+  font-family:'Inter', sans-serif;
+  font-size:1.06rem;
+  font-weight:700;
+  color:var(--heading);
+  letter-spacing:-.015em;
+}
+.tl-company{
+  display:block;
+  font-size:.87rem;
+  color:var(--accent-dark);
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.tl-date{
+  font-size:.73rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+  background:var(--surface-2);
+  padding:5px 13px;
+  border-radius:100px;
+  white-space:nowrap;
+}
+.tl-item--current .tl-date{
+  background:var(--accent-soft);
+  color:var(--accent-dark);
+}
+
+.tl-card p{ font-size:.91rem; color:var(--text); line-height:1.7; }
+.tl-card p + p{ margin-top:10px; }
+
+.tl-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:16px;
+}
+.tl-tags span{
+  font-size:.73rem;
+  font-weight:600;
+  color:var(--muted);
+  background:var(--surface);
+  border:1px solid var(--line);
+  padding:4px 11px;
+  border-radius:100px;
+}
+
+/* ============================================================
+   9. PROJECTS
+   ============================================================ */
+.projects__grid{
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:28px;
+}
+
+.project{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:all .4s var(--ease);
+}
+.project:hover{
+  transform:translateY(-8px);
+  box-shadow:var(--shadow-lg);
+  border-color:transparent;
+}
+
+.project__visual{
+  height:186px;
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.project__visual--a{
+  background:linear-gradient(135deg, #1b3a63 0%, #0b1d33 100%);
+}
+.project__visual--b{
+  background:linear-gradient(135deg, #7a5b13 0%, #2a1f06 100%);
+}
+.project__visual::after{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:32px 32px;
+  opacity:.65;
+}
+.project__visual svg{
+  width:64px; height:64px;
+  color:rgba(255,255,255,.9);
+  position:relative;
+  z-index:1;
+  transition:transform .45s var(--ease);
+}
+.project:hover .project__visual svg{ transform:scale(1.12) rotate(-4deg); }
+
+.project__label{
+  position:absolute;
+  top:16px; left:16px;
+  z-index:2;
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#241a05;
+  background:var(--accent);
+  padding:5px 12px;
+  border-radius:100px;
+}
+
+.project__body{
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+.project__body h3{
+  font-family:'Inter', sans-serif;
+  font-size:1.16rem;
+  font-weight:700;
+  margin-bottom:6px;
+  letter-spacing:-.02em;
+}
+.project__type{
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--accent-dark);
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.project__body p{
+  font-size:.9rem;
+  color:var(--muted);
+  line-height:1.72;
+  margin-bottom:18px;
+}
+
+.project__features{
+  display:grid;
+  gap:8px;
+  margin-bottom:22px;
+}
+.project__features li{
+  display:flex;
+  gap:9px;
+  font-size:.85rem;
+  color:var(--text);
+  align-items:flex-start;
+}
+.project__features li::before{
+  content:"";
+  width:5px; height:5px;
+  border-radius:50%;
+  background:var(--accent);
+  flex-shrink:0;
+  margin-top:8px;
+}
+
+.project__stack{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:auto;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+.project__stack span{
+  font-size:.72rem;
+  font-weight:600;
+  color:var(--navy-3);
+  background:var(--surface-2);
+  padding:5px 12px;
+  border-radius:7px;
+  letter-spacing:.01em;
+}
+
+/* ============================================================
+   10. POETRY
+   ============================================================ */
+.poetry{
+  background:var(--navy);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+}
+.poetry::before{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(800px 500px at 15% 100%, rgba(200,162,74,.14), transparent 60%);
+}
+.poetry .container{ position:relative; z-index:1; }
+.poetry .section-title{ color:#fff; }
+.poetry .section-sub{ color:rgba(255,255,255,.62); }
+.poetry .eyebrow{ color:var(--accent); }
+
+.poetry__grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:24px;
+  margin-top:56px;
+}
+
+.poem{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:var(--radius);
+  padding:32px 28px;
+  transition:all .4s var(--ease);
+  position:relative;
+}
+.poem:hover{
+  background:rgba(255,255,255,.09);
+  border-color:rgba(200,162,74,.42);
+  transform:translateY(-7px);
+}
+.poem__quote{
+  font-family:'Playfair Display', serif;
+  font-size:3.4rem;
+  line-height:.6;
+  color:var(--accent);
+  opacity:.42;
+  margin-bottom:16px;
+}
+.poem h4{
+  color:#fff;
+  font-size:1.06rem;
+  margin-bottom:16px;
+  font-weight:600;
+}
+.poem p{
+  font-family:'Playfair Display', serif;
+  font-size:.98rem;
+  line-height:1.95;
+  color:rgba(255,255,255,.8);
+  font-style:italic;
+}
+.poem__foot{
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid rgba(255,255,255,.1);
+  font-size:.74rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.42);
+  font-weight:600;
+}
+
+/* ============================================================
+   11. CONTACT
+   ============================================================ */
+.contact__grid{
+  display:grid;
+  grid-template-columns:.92fr 1.08fr;
+  gap:56px;
+  align-items:start;
+}
+
+.contact__intro p{
+  font-size:1.01rem;
+  color:var(--muted);
+  margin-bottom:32px;
+}
+
+.contact__list{ display:grid; gap:14px; }
+
+.contact__item{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 20px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  transition:all .3s var(--ease);
+}
+.contact__item:hover{
+  border-color:rgba(200,162,74,.5);
+  transform:translateX(5px);
+  box-shadow:var(--shadow-sm);
+}
+.contact__icon{
+  width:42px; height:42px;
+  border-radius:11px;
+  background:var(--accent-soft);
+  color:var(--accent-dark);
+  display:grid; place-items:center;
+  flex-shrink:0;
+}
+.contact__icon svg{ width:19px; height:19px; }
+
+.contact__meta{ display:flex; flex-direction:column; line-height:1.4; min-width:0; }
+.contact__meta span{
+  font-size:.71rem;
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  color:var(--muted);
+  font-weight:600;
+}
+.contact__meta strong{
+  font-size:.93rem;
+  color:var(--heading);
+  font-weight:600;
+  overflow-wrap:anywhere;
+}
+
+/* Form */
+.form-card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:36px;
+  box-shadow:var(--shadow-sm);
+}
+.form-card h3{
+  font-family:'Inter', sans-serif;
+  font-size:1.16rem;
+  font-weight:700;
+  margin-bottom:6px;
+  letter-spacing:-.02em;
+}
+.form-card > p{
+  font-size:.88rem;
+  color:var(--muted);
+  margin-bottom:26px;
+}
+
+.form-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.field{ margin-bottom:18px; }
+.field label{
+  display:block;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--heading);
+  margin-bottom:7px;
+  letter-spacing:.02em;
+}
+.field input,
+.field textarea{
+  width:100%;
+  padding:13px 16px;
+  border:1.5px solid var(--line);
+  border-radius:11px;
+  font-family:inherit;
+  font-size:.92rem;
+  color:var(--text);
+  background:var(--surface);
+  transition:all .25s var(--ease);
+  resize:vertical;
+}
+.field input::placeholder,
+.field textarea::placeholder{ color:#a4b0c0; }
+.field input:focus,
+.field textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  background:#fff;
+  box-shadow:0 0 0 4px rgba(200,162,74,.12);
+}
+.field textarea{ min-height:124px; }
+
+.form-card .btn{ width:100%; margin-top:6px; }
+
+.form-note{
+  margin-top:16px;
+  font-size:.79rem;
+  color:var(--muted);
+  text-align:center;
+}
+
+.form-status{
+  margin-top:16px;
+  padding:13px 18px;
+  border-radius:11px;
+  font-size:.86rem;
+  font-weight:500;
+  display:none;
+  background:rgba(74,222,128,.12);
+  color:#166534;
+  border:1px solid rgba(74,222,128,.35);
+}
+.form-status.show{ display:block; animation:fadeUp .4s var(--ease); }
+
+@keyframes fadeUp{
+  from{ opacity:0; transform:translateY(8px); }
+  to  { opacity:1; transform:translateY(0); }
+}
+
+/* ============================================================
+   12. FOOTER
+   ============================================================ */
+.footer{
+  background:var(--navy);
+  color:rgba(255,255,255,.6);
+  padding:52px 0 34px;
+}
+.footer__top{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:26px;
+  padding-bottom:28px;
+  border-bottom:1px solid rgba(255,255,255,.09);
+}
+.footer__brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.footer__brand .brand__name{ color:#fff; }
+.footer__brand .brand__role{ color:rgba(255,255,255,.5); }
+
+.footer__social{
+  display:flex;
+  gap:10px;
+}
+.footer__social a{
+  width:40px; height:40px;
+  border-radius:10px;
+  display:grid; place-items:center;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.72);
+  transition:all .3s var(--ease);
+}
+.footer__social a:hover{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#241a05;
+  transform:translateY(-3px);
+}
+.footer__social svg{ width:17px; height:17px; }
+
+.footer__bottom{
+  padding-top:24px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  gap:12px;
+  font-size:.82rem;
+}
+.footer__bottom a:hover{ color:var(--accent); }
+
+/* ============================================================
+   13. SCROLL REVEAL
+   ============================================================ */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .75s var(--ease), transform .75s var(--ease);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ============================================================
+   14. BACK TO TOP
+   ============================================================ */
+.to-top{
+  position:fixed;
+  right:24px; bottom:24px;
+  width:46px; height:46px;
+  border-radius:50%;
+  background:var(--navy);
+  color:#fff;
+  display:grid; place-items:center;
+  box-shadow:var(--shadow);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(14px);
+  transition:all .35s var(--ease);
+  z-index:900;
+}
+.to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
+.to-top:hover{ background:var(--accent); color:#241a05; }
+.to-top svg{ width:18px; height:18px; }
+
+/* ============================================================
+   15. RESPONSIVE
+   ============================================================ */
+@media (max-width:1024px){
+  .hero__grid{ grid-template-columns:1fr; gap:52px; }
+  .hero__card{ animation:none; max-width:560px; }
+  .about__grid{ grid-template-columns:1fr; gap:48px; }
+  .contact__grid{ grid-template-columns:1fr; gap:44px; }
+  .poetry__grid{ grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width:860px){
+  .nav__toggle{ display:block; }
+
+  .nav__list{
+    position:fixed;
+    top:0; right:0;
+    height:100vh;
+    width:min(320px, 82vw);
+    background:#fff;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:4px;
+    padding:96px 22px 40px;
+    box-shadow:-16px 0 48px rgba(11,29,51,.16);
+    transform:translateX(105%);
+    transition:transform .4s var(--ease);
+    z-index:1001;
+  }
+  .nav__list.open{ transform:translateX(0); }
+
+  .nav__link{
+    color:var(--text) !important;
+    padding:14px 16px;
+    font-size:.98rem;
+    border-radius:10px;
+  }
+  .nav__link:hover,
+  .nav__link.active{
+    background:var(--accent-soft);
+    color:var(--accent-dark) !important;
+  }
+  .nav__link.active::after{ display:none; }
+
+  .nav__cta{
+    display:block;
+    text-align:center;
+    margin-top:18px;
+    padding:14px;
+  }
+
+  .nav__overlay{
+    position:fixed; inset:0;
+    background:rgba(11,29,51,.45);
+    backdrop-filter:blur(3px);
+    opacity:0;
+    visibility:hidden;
+    transition:all .35s var(--ease);
+    z-index:1000;
+  }
+  .nav__overlay.show{ opacity:1; visibility:visible; }
+
+  .nav__toggle{ z-index:1002; }
+}
+
+@media (max-width:720px){
+  .section{ padding:76px 0; }
+  .hero{ padding:140px 0 84px; }
+
+  .hero__stats{ grid-template-columns:1fr; gap:24px; }
+  .about__pillars{ grid-template-columns:1fr; }
+  .projects__grid{ grid-template-columns:1fr; }
+  .poetry__grid{ grid-template-columns:1fr; }
+  .form-row{ grid-template-columns:1fr; }
+  .form-card{ padding:26px 22px; }
+
+  .timeline{ padding-left:30px; }
+  .tl-item::before{ left:-30px; width:15px; height:15px; }
+  .tl-card{ padding:22px 20px; }
+  .tl-card:hover{ transform:none; }
+
+  .footer__top{ flex-direction:column; align-items:flex-start; }
+  .to-top{ right:16px; bottom:16px; }
+}
+
+@media (max-width:420px){
+  .container{ padding-inline:18px; }
+  .hero__actions .btn{ width:100%; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{ opacity:1; transform:none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="site-header" id="header">
+  <div class="container">
+    <nav class="nav" aria-label="Main navigation">
+
+      <a href="#home" class="brand" aria-label="Home">
+        <div class="brand__mark">S</div>
+        <div class="brand__text">
+          <span class="brand__name">Samiksha Tech Solutions</span>
+          <span class="brand__role">Founder &amp; Consultant</span>
+        </div>
+      </a>
+
+      <ul class="nav__list" id="navList">
+        <li><a href="#home"     class="nav__link active">Home</a></li>
+        <li><a href="#about"    class="nav__link">About</a></li>
+        <li><a href="#journey"  class="nav__link">Journey</a></li>
+        <li><a href="#projects" class="nav__link">Projects</a></li>
+        <li><a href="#poetry"   class="nav__link">Poetry</a></li>
+        <li><a href="#contact"  class="nav__link">Contact</a></li>
+        <li><a href="#contact"  class="nav__cta">Let's Talk</a></li>
+      </ul>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+    </nav>
+  </div>
+</header>
+<div class="nav__overlay" id="navOverlay"></div>
+
+
+<main>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero__grid">
+
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="dot"></span>
+          Available for consulting engagements
+        </div>
+
+        <h1>Hi, I'm <span class="accent">Abhishek Patel</span><br>Building technology that works.</h1>
+
+        <p class="hero__role">
+          <span class="typed" id="typed"></span>
+        </p>
+
+        <p class="hero__desc">
+          Founder of <strong style="color:rgba(255,255,255,.92);font-weight:600;">Samiksha Tech Solutions</strong> —
+          an IT consulting company helping businesses design, build, and scale reliable software.
+          Previously a Software Engineer at Wipro Limited and Co-founder of URROSSA Manufacturing.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#contact" class="btn btn--primary">
+            Start a Conversation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#journey" class="btn btn--ghost">
+            View My Journey
+          </a>
+        </div>
+
+        <div class="hero__stats">
+          <div class="stat">
+            <div class="stat__num" data-count="3" data-suffix="+">0</div>
+            <div class="stat__label">Years at Wipro</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num" data-count="2" data-suffix="">0</div>
+            <div class="stat__label">Ventures Founded</div>
+          </div>
+          <div class="stat">
+            <div class="stat__num" data-count="2021" data-suffix="" data-raw="true">0</div>
+            <div class="stat__label">CSE Graduate</div>
+          </div>
+        </div>
+      </div>
+
+      <aside  class="hero__card">
+
+        <img src="profile.jpg" alt="Abhishek Patel — Founder, Samiksha Tech Solutions" class="profile-img" />
+        <h3>Samiksha Tech Solutions</h3>
+        <span class="card-role">Founder &amp; IT Consultant</span>
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>End-to-end software consulting — from discovery to deployment</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Web platforms, e-commerce systems &amp; business automation</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Cloud-ready architecture, clean code &amp; measurable outcomes</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            <span>Enterprise delivery experience from Wipro Limited</span>
+          </li>
+        </ul>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section class="section" id="about">
+  <div class="container">
+
+    <div class="about__grid">
+
+      <div class="about__text reveal">
+        <div class="eyebrow">About Me</div>
+        <h2 class="section-title">Engineer, founder, and storyteller.</h2>
+
+        <p>
+          I began my career with a <strong>Bachelor's degree in Computer Science and Engineering</strong>
+          from <strong>Lovely Professional University</strong>, graduating in 2021. That foundation took me
+          straight into enterprise software delivery at <strong>Wipro Limited</strong>, where I spent over
+          three years as a Software Engineer building and maintaining systems for large-scale clients.
+        </p>
+
+        <p>
+          In 2025 I moved from execution to ownership — founding <strong>Samiksha Tech Solutions</strong>,
+          an IT consulting company that partners with businesses to design, build, and scale the software
+          they actually need. I also previously co-founded <strong>URROSSA Manufacturing</strong>, where I
+          learned how technology, operations, and people have to move together for a business to grow.
+        </p>
+
+        <p>
+          Outside of the terminal, I write poetry. It keeps me honest about language — and it turns out that
+          clear thinking and clear writing are the same skill, whether you're shipping a product or
+          finishing a verse.
+        </p>
+      </div>
+
+      <div class="about__pillars reveal">
+
+        <article class="pillar">
+          <div class="pillar__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m8 10 3 3-3 3M14 16h3"/></svg>
+          </div>
+          <h4>Software Engineering</h4>
+          <p>Enterprise-grade development, API design, and maintainable codebases built to last.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>
+          </div>
+          <h4>IT Consulting</h4>
+          <p>Technology strategy and delivery leadership for growing businesses and founders.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h4>Product &amp; Venture</h4>
+          <p>Two-time founder — from manufacturing operations to digital product building.</p>
+        </article>
+
+        <article class="pillar">
+          <div class="pillar__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          </div>
+          <h4>Creative Writing</h4>
+          <p>Poetry and creative writing — a parallel craft that sharpens clarity and empathy.</p>
+        </article>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     JOURNEY / TIMELINE
+     ============================================================ -->
+<section class="section section--surface" id="journey">
+  <div class="container">
+
+    <div class="section-head section-head--center reveal">
+      <div class="eyebrow">Career &amp; Education</div>
+      <h2 class="section-title">The journey so far</h2>
+      <p class="section-sub">
+        From a computer science classroom to enterprise delivery, and on to founding my own company.
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <!-- 1 -->
+      <article class="tl-item tl-item--current reveal">
+        <div class="tl-card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-role">Founder &amp; IT Consultant</div>
+              <span class="tl-company">Samiksha Tech Solutions</span>
+            </div>
+            <span class="tl-date">2025 — Present</span>
+          </div>
+          <p>
+            Founded an IT consulting company focused on helping businesses design, build, and scale
+            software that solves real operational problems. Leading client engagements end-to-end —
+            discovery, architecture, development, delivery, and post-launch support.
+          </p>
+          <p>
+            Responsible for technical strategy, solution design, client relationships, and building
+            the delivery practice from the ground up.
+          </p>
+          <div class="tl-tags">
+            <span>IT Consulting</span>
+            <span>Solution Architecture</span>
+            <span>Client Delivery</span>
+            <span>Business Strategy</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2 -->
+      <article class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-role">Software Engineer</div>
+              <span class="tl-company">Wipro Limited</span>
+            </div>
+            <span class="tl-date">2021 — 2025</span>
+          </div>
+          <p>
+            Over three years delivering software for enterprise clients in a structured, process-driven
+            engineering environment. Worked across the development lifecycle — requirement analysis,
+            implementation, testing, deployment, and production support.
+          </p>
+          <p>
+            Collaborated with cross-functional teams and client stakeholders, building the discipline
+            around code quality, timelines, and reliable delivery that now underpins my consulting work.
+          </p>
+          <div class="tl-tags">
+            <span>Software Development</span>
+            <span>Enterprise Applications</span>
+            <span>Agile Delivery</span>
+            <span>Production Support</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3 -->
+      <article class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-role">Co-Founder</div>
+              <span class="tl-company">URROSSA Manufacturing</span>
+            </div>
+            <span class="tl-date">Earlier Venture</span>
+          </div>
+          <p>
+            Co-founded a manufacturing venture, contributing to operations, process setup, and
+            business development. This experience built the entrepreneurial foundation — understanding
+            cost, customers, supply, and the reality of running something of your own.
+          </p>
+          <div class="tl-tags">
+            <span>Entrepreneurship</span>
+            <span>Operations</span>
+            <span>Business Development</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="tl-item reveal">
+        <div class="tl-card">
+          <div class="tl-top">
+            <div>
+              <div class="tl-role">B.Tech — Computer Science &amp; Engineering</div>
+              <span class="tl-company">Lovely Professional University</span>
+            </div>
+            <span class="tl-date">Graduated 2021</span>
+          </div>
+          <p>
+            Completed a Bachelor's degree in Computer Science and Engineering, building the core
+            foundations in programming, data structures, databases, software design, and computer
+            networks that shaped my engineering career.
+          </p>
+          <div class="tl-tags">
+            <span>Computer Science</span>
+            <span>Software Engineering</span>
+            <span>Class of 2021</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
+<section class="section" id="projects">
+  <div class="container">
+
+    <div class="section-head section-head--center reveal">
+      <div class="eyebrow">Selected Work</div>
+      <h2 class="section-title">Major projects</h2>
+      <p class="section-sub">
+        Products and platforms I've designed and built — from e-commerce to travel technology.
+      </p>
+    </div>
+
+    <div class="projects__grid">
+
+      <!-- Project 1 -->
+      <article class="project reveal">
+        <div class="project__visual project__visual--a">
+          <span class="project__label">E-Commerce</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="20" r="1.5"/>
+            <circle cx="18" cy="20" r="1.5"/>
+            <path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.1a2 2 0 0 0 2-1.6L21 7H6"/>
+          </svg>
+        </div>
+
+        <div class="project__body">
+          <h3>Swastika Batique</h3>
+          <div class="project__type">E-Commerce Platform</div>
+          <p>
+            A full-featured online store built for a batique and ethnic-wear brand — designed to take
+            the business from offline retail to a scalable digital storefront with a smooth buying
+            experience on every device.
+          </p>
+          <ul class="project__features">
+            <li>Product catalogue with categories, variants, and image galleries</li>
+            <li>Cart, checkout flow, and order management</li>
+            <li>Secure payment integration and order confirmation</li>
+            <li>Admin dashboard for inventory, pricing, and orders</li>
+            <li>Mobile-first, responsive storefront design</li>
+          </ul>
+          <div class="project__stack">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>E-Commerce</span>
+            <span>Payments</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project reveal">
+        <div class="project__visual project__visual--b">
+          <span class="project__label">Travel Tech</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/>
+          </svg>
+        </div>
+
+        <div class="project__body">
+          <h3>Traveler's Website</h3>
+          <div class="project__type">Travel Discovery Platform</div>
+          <p>
+            A travel website built for travellers who want inspiration and planning in one place —
+            destination discovery, curated itineraries, and a clean booking enquiry flow that keeps
+            the experience simple and fast.
+          </p>
+          <ul class="project__features">
+            <li>Destination listings with search and filtering</li>
+            <li>Curated itineraries and trip detail pages</li>
+            <li>Booking / enquiry forms with validation</li>
+            <li>Traveller reviews and ratings</li>
+            <li>Fully responsive layout optimised for mobile browsing</li>
+          </ul>
+          <div class="project__stack">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>Responsive UI</span>
+            <span>Search &amp; Filters</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     POETRY
+     ============================================================ -->
+<section class="section poetry" id="poetry">
+  <div class="container">
+
+    <div class="section-head section-head--center reveal">
+      <div class="eyebrow">Beyond Code</div>
+      <h2 class="section-title">Poetry &amp; creative writing</h2>
+      <p class="section-sub">
+        Writing is the other half of how I think. A few short pieces from the notebook.
+      </p>
+    </div>
+
+    <div class="poetry__grid">
+
+      <article class="poem reveal">
+        <div class="poem__quote">&ldquo;</div>
+        <h4>Between the Lines</h4>
+        <p>
+          Some stories live in silence,<br>
+          between the pause and the pen —<br>
+          a quiet verse that finds you<br>
+          when you least expect again.
+        </p>
+        <div class="poem__foot">Original Verse</div>
+      </article>
+
+      <article class="poem reveal">
+        <div class="poem__quote">&ldquo;</div>
+        <h4>The Long Road Home</h4>
+        <p>
+          I have carried cities in my pocket,<br>
+          and left a little light in each —<br>
+          every road I walked away from<br>
+          still has something left to teach.
+        </p>
+        <div class="poem__foot">Original Verse</div>
+      </article>
+
+      <article class="poem reveal">
+        <div class="poem__quote">&ldquo;</div>
+        <h4>Small Hours</h4>
+        <p>
+          At 2 a.m. the world grows honest,<br>
+          the noise lies down to rest,<br>
+          and every thought I could not say<br>
+          becomes a line I do my best.
+        </p>
+        <div class="poem__foot">Original Verse</div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section class="section" id="contact">
+  <div class="container">
+
+    <div class="contact__grid">
+
+      <div class="contact__intro reveal">
+        <div class="eyebrow">Get In Touch</div>
+        <h2 class="section-title">Let's build something together.</h2>
+        <p>
+          Whether you need an IT consulting partner, a software solution for your business,
+          or simply want to connect — I'd be glad to hear from you.
+        </p>
+
+        <div class="contact__list">
+
+          <a class="contact__item" href="mailto:samikshatechsolutions@gmail.com">
+            <div class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            </div>
+            <div class="contact__meta">
+              <span>Email</span>
+              <strong>samikshatechsolutions@gmail.com</strong>
+            </div>
+          </a>
+
+          <a class="contact__item" href="tel:+919876924411">
+            <div class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+            </div>
+            <div class="contact__meta">
+              <span>Phone</span>
+              <strong>+91 98769 24411</strong>
+            </div>
+          </a>
+
+          <a class="contact__item" href="https://www.linkedin.com/in/abhishek" target="_blank" rel="noopener">
+            <div class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9Z"/></svg>
+            </div>
+            <div class="contact__meta">
+              <span>LinkedIn</span>
+              <strong>linkedin.com/in/your-profile</strong>
+            </div>
+          </a>
+
+          <div class="contact__item">
+            <div class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact__meta">
+              <span>Location</span>
+              <strong>India</strong>
+            </div>
+          </div>
+
+          <a class="contact__item" href="https://samikshatechsolutions.github.io/" target="_blank" rel="noopener">
+            <div class="contact__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg>
+            </div>
+            <div class="contact__meta">
+              <span>Company</span>
+              <strong>Samiksha Tech Solutions</strong>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <h3>Send a message</h3>
+        <p>Fill in the form and I'll get back to you as soon as possible.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@company.com" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Consulting enquiry, project, collaboration…" required />
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me a little about what you're looking for…" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary">
+            Send Message
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+          </button>
+
+          <div class="form-status" id="formStatus" role="status"></div>
+          <p class="form-note">Prefer email? Write to <strong>your.email@example.com</strong></p>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="brand__mark">S</div>
+        <div class="brand__text">
+          <span class="brand__name">Abhishek Patel</span>
+          <span class="brand__role">Founder — Samiksha Tech Solutions</span>
+        </div>
+      </div>
+
+      <div class="footer__social">
+        <a href="https://www.linkedin.com/in/your-profile" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21h-4V9Z"/></svg>
+        </a>
+        <a href="mailto:samikshatechsolutions@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+        </a>
+        <a href="tel:+919876924411" aria-label="Phone">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; <span id="year"></span> Abhishek Patel. All rights reserved.</span>
+      <span>Founder, <a href="#home">Samiksha Tech Solutions</a></span>
+    </div>
+
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+
+<script>
+/* ============================================================
+   1. HEADER SCROLL STATE
+   ============================================================ */
+(function () {
+  const header = document.getElementById('header');
+  const toTop  = document.getElementById('toTop');
+
+  function onScroll() {
+    const y = window.scrollY;
+    header.classList.toggle('scrolled', y > 40);
+    toTop.classList.toggle('show', y > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  toTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+
+/* ============================================================
+   2. MOBILE NAVIGATION
+   ============================================================ */
+(function () {
+  const toggle  = document.getElementById('navToggle');
+  const list    = document.getElementById('navList');
+  const overlay = document.getElementById('navOverlay');
+
+  function closeMenu() {
+    toggle.classList.remove('open');
+    list.classList.remove('open');
+    overlay.classList.remove('show');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  function openMenu() {
+    toggle.classList.add('open');
+    list.classList.add('open');
+    overlay.classList.add('show');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  toggle.addEventListener('click', () => {
+    list.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  overlay.addEventListener('click', closeMenu);
+
+  list.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 860) closeMenu();
+  });
+})();
+
+
+/* ============================================================
+   3. SCROLL REVEAL ANIMATIONS
+   ============================================================ */
+(function () {
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Small stagger for grouped elements
+        setTimeout(() => entry.target.classList.add('visible'), i * 90);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  items.forEach(el => observer.observe(el));
+})();
+
+
+/* ============================================================
+   4. ACTIVE NAV LINK ON SCROLL
+   ============================================================ */
+(function () {
+  const sections = document.querySelectorAll('section[id]');
+  const links    = document.querySelectorAll('.nav__link');
+  if (!sections.length || !links.length) return;
+
+  function setActive() {
+    const scrollPos = window.scrollY + 140;
+    let currentId = sections[0].id;
+
+    sections.forEach(sec => {
+      if (scrollPos >= sec.offsetTop) currentId = sec.id;
+    });
+
+    links.forEach(link => {
+      const isActive = link.getAttribute('href') === '#' + currentId;
+      link.classList.toggle('active', isActive);
+    });
+  }
+
+  window.addEventListener('scroll', setActive, { passive: true });
+  setActive();
+})();
+
+
+/* ============================================================
+   5. HERO TYPING EFFECT
+   ============================================================ */
+(function () {
+  const el = document.getElementById('typed');
+  if (!el) return;
+
+  const roles = [
+    'Founder — Samiksha Tech Solutions',
+    'IT Consultant & Software Engineer',
+    'Ex-Software Engineer at Wipro Limited',
+    'Co-founder — URROSSA Manufacturing',
+    'Poet & Creative Writer'
+  ];
+
+  let roleIndex = 0;
+  let charIndex = 0;
+  let deleting  = false;
+
+  const TYPE_SPEED   = 65;
+  const DELETE_SPEED = 32;
+  const HOLD_TIME    = 1700;
+
+  function tick() {
+    const current = roles[roleIndex];
+
+    if (!deleting) {
+      el.textContent = current.slice(0, ++charIndex);
+      if (charIndex === current.length) {
+        deleting = true;
+        return setTimeout(tick, HOLD_TIME);
+      }
+      return setTimeout(tick, TYPE_SPEED);
+    }
+
+    el.textContent = current.slice(0, --charIndex);
+    if (charIndex === 0) {
+      deleting = false;
+      roleIndex = (roleIndex + 1) % roles.length;
+      return setTimeout(tick, 320);
+    }
+    return setTimeout(tick, DELETE_SPEED);
+  }
+
+  // Respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = roles[0];
+    el.style.borderRight = 'none';
+    return;
+  }
+
+  setTimeout(tick, 700);
+})();
+
+
+/* ============================================================
+   6. ANIMATED STAT COUNTERS
+   ============================================================ */
+(function () {
+  const nums = document.querySelectorAll('.stat__num');
+  if (!nums.length) return;
+
+  function animate(el) {
+    const target  = parseInt(el.dataset.count, 10);
+    const suffix  = el.dataset.suffix || '';
+    const isRaw   = el.dataset.raw === 'true';   // e.g. year "2021"
+    const duration = 1400;
+    const start    = performance.now();
+
+    function frame(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      // easeOutCubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+
+      el.textContent = isRaw ? value : value + suffix;
+
+      if (progress < 1) requestAnimationFrame(frame);
+      else el.textContent = isRaw ? target : target + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    nums.forEach(animate);
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  nums.forEach(el => observer.observe(el));
+})();
+
+
+/* ============================================================
+   7. CONTACT FORM
+   ============================================================ */
+(function () {
+  const form   = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name    = form.name.value.trim();
+    const email   = form.email.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    // Basic validation
+    if (!name || !email || !subject || !message) {
+      showStatus('Please fill in all fields before sending.', false);
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      showStatus('Please enter a valid email address.', false);
+      return;
+    }
+
+    /* --------------------------------------------------------
+       No backend is wired up. This builds a mailto: link so the
+       message opens in the visitor's email client.
+
+       To use a real backend instead, replace this block with a
+       fetch() call to your API / Formspree / EmailJS endpoint.
+       -------------------------------------------------------- */
+    const to      = 'your.email@example.com';
+    const subjectLine = encodeURIComponent(`[Website] ${subject}`);
+    const body    = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`
+    );
+
+    window.location.href = `mailto:${to}?subject=${subjectLine}&body=${body}`;
+
+    showStatus('Thank you, ' + name + '! Your email client is opening — just hit send.', true);
+    form.reset();
+  });
+
+  function showStatus(text, success) {
+    status.textContent = text;
+    status.style.background = success ? 'rgba(74,222,128,.12)' : 'rgba(248,113,113,.12)';
+    status.style.color      = success ? '#166534' : '#991b1b';
+    status.style.border     = success
+      ? '1px solid rgba(74,222,128,.35)'
+      : '1px solid rgba(248,113,113,.35)';
+    status.classList.add('show');
+
+    clearTimeout(showStatus._t);
+    showStatus._t = setTimeout(() => status.classList.remove('show'), 6000);
+  }
+})();
+
+
+/* ============================================================
+   8. FOOTER YEAR
+   ============================================================ */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
